@@ -37,10 +37,10 @@ class Solution {
   public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
       // create result linked list
-      ListNode* result = new ListNode(0);
+      ListNode* head = new ListNode(0);
 
       // tmp variables
-      ListNode *cur = result, *inl1 = l1, *inl2 = l2;
+      ListNode *cur = head, *inl1 = l1, *inl2 = l2;
       int carry = 0;
 
       // for each digit/node
@@ -57,7 +57,9 @@ class Solution {
       if (carry) {
         cur->next = new ListNode(carry);
       }
-      return result->next;
+      auto result = head->next;
+      delete head;
+      return result;
     }
 };
 
