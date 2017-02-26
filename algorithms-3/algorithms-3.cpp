@@ -8,7 +8,7 @@ class Solution {
   public:
     int lengthOfLongestSubstring(string s) {
       std::string substr = "";
-      size_t longest = 0;
+      size_t longest = 1;
       for (auto& chr : s) {
         auto loc = substr.find(chr);
         if (loc == string::npos) {
@@ -27,7 +27,7 @@ class Solution {
 
 int main (int argc, char** argv) {
 
-  string str = "abaaabcbcdbaa";
+  string str = "aaaaaaaa";
   Solution s;
 
   cout << "str: " << str << endl;
