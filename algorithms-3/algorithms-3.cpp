@@ -1,6 +1,7 @@
 //usr/bin/env g++ --std=c++14 algorithms-3.cpp -o alg3; ./alg3; rm alg3; exit
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -8,30 +9,43 @@ class Solution {
   public:
     int lengthOfLongestSubstring(string s) {
       std::string substr = "";
-      size_t longest = 1;
+      size_t longest = s.empty() ? 0 : 1;
       for (auto& chr : s) {
+        //cout << "\tchr: " << chr << endl;
+        //cout << "\t\tsubstr: " << substr << endl;
         auto loc = substr.find(chr);
         if (loc == string::npos) {
           substr += chr;
+          cout << "\t\tnew substr: " << substr << endl;
         } else {
           if (substr.size() > longest) {
             longest = substr.size();
+            //cout << "\t\tnew longest: " << substr << ", " << longest << endl;
           }
-          substr.clear();
+          substr.erase(0,loc+1);
           substr += chr;
         }
       }
-      return longest;
+      return std::max(longest, substr.size());
     }
 };
 
 int main (int argc, char** argv) {
 
-  string str = "aaaaaaaa";
+  vector<string> tests {
+    "",
+    "a",
+    "aa",
+    "aba",
+    "abacaba",
+    "abc"
+  };
   Solution s;
 
-  cout << "str: " << str << endl;
-  auto len = s.lengthOfLongestSubstring(str);
-  cout << "len: " << len << endl;
+  for (auto& test : tests) {
+    cout << "test: \"" << test << "\""<< endl;
+    auto len = s.lengthOfLongestSubstring(test);
+    cout << "result: " << len << endl;
+  }
   return 0;
 }
