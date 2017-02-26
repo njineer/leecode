@@ -1,4 +1,4 @@
-//usr/bin/env g++ --std=c++14 algorithms-3.cpp -o alg3; ./alg3; rm alg3; exit
+//usr/bin/env g++ --std=c++14 algorithms-3_v2.cpp -o alg3; ./alg3; rm alg3; exit
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,16 +10,16 @@ class Solution {
   public:
     int lengthOfLongestSubstring(string s) {
       std::map<char, int> substr {};
-      size_t longest = s.empty() ? 0 : 1;
+      int longest = s.empty() ? 0 : 1;
       int dup=0;
       for (int i=0; i<s.size(); ++i) {
         auto chr = s[i];
         auto loc = substr.find(chr);
         if (loc != substr.end()) {
-          dup =  substr[chr];
+          dup =  std::max(dup, loc->second);
         } 
-        substr[chr] = i;
-        longest = std::max(longest, dup);
+        substr[chr] = i+1;
+        longest = std::max(longest, i-dup+1);
       }
       return longest;
     }
