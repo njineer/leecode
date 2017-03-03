@@ -13,22 +13,22 @@ class Solution {
         --left; 
         ++right;
       }
-      return right-left;
+      return right-left-1;
     }
 
     string longestPalindrome(string s) {
-      int substr_start=0;
-      size_t substr_length = 0;
+      unsigned int substr_start=0;
+      unsigned int substr_length = 0;
       for (int i=0; i<s.size(); ++i) {
         auto len1 = expandCandidate(s,i,i);
         auto len2 = expandCandidate(s,i,i+1);
         auto len = std::max(len1, len2);
         if (len > substr_length) {
+          substr_start = i - (len-1)/2;
           substr_length = len;
-          substr_start = i - (substr_length-1)/2;
         }
       }
-      return s.substr(substr_start,substr_length-1);
+      return s.substr(substr_start,substr_length);
     }
 };
 
@@ -36,10 +36,18 @@ int main(int argc, char** argv) {
 
   Solution s;
 
-  string test = "babacabbabababcb";
-  auto result = s.longestPalindrome(test);
-  cout << "test: " << test << endl << "result: " << result << endl << endl;
-
+  vector<string> tests {
+    "b",
+    "bb",
+    "bbb",
+    "abcba",
+    "abcbad",
+    "babacabbabababcb"
+  };
+  for (auto& test : tests) {
+    auto result = s.longestPalindrome(test);
+    cout << "test: " << test << endl << "result: " << result << endl << endl;
+  }
 }
 
 
