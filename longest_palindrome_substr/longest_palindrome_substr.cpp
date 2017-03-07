@@ -1,4 +1,4 @@
-//usr/bin/env g++ --std=c++14 algorithms-5.cpp -o alg5; ./alg5; exit
+//usr/bin/env g++ --std=c++14 longest_palindrome_substr.cpp -o lps; ./lps; exit
 
 #include <iostream>
 #include <vector>
