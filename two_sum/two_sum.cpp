@@ -1,4 +1,4 @@
-//usr/bin/env g++ --std=c++14 algorithms-2.cpp -o alg2; ./alg2; exit
+//usr/bin/env g++ --std=c++14 two_sum.cpp -o two_sum; ./two_sum; exit
 
 #include <iostream>
 #include <vector>
