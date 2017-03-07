@@ -1,4 +1,4 @@
-//usr/bin/env g++ --std=c++14 algorithms-3.cpp -o alg3; ./alg3; rm alg3; exit
+//usr/bin/env g++ --std=c++14 add_two_numbers.cpp -o add_two_numbers; ./add_two_numbers; rm add_two_numbers; exit
 #include <iostream>
 #include <string>
 #include <vector>
