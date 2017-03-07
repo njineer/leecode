@@ -30,13 +30,13 @@ private:
         if (result > INT32_MAX)
           result = INT32_MAX;
 
-        // negative
-        if (re_match.str(1) == "-")
-          result *= -1;
-
         // underflow
-        else if (result < INT32_MIN)
+        else if (result <= INT32_MIN)
           result  = INT32_MIN;
+
+        // negative
+        else if (re_match.str(1) == "-")
+          result *= -1;
       } 
       return result;
     }
