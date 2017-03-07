@@ -23,21 +23,21 @@ private:
       smatch re_match;
       auto match = regex_search(str, re_match, re_base10); 
       if (!re_match.empty()) {
-        result = re_match.str(1) == "-" ? -1 : 1;
         for (auto& chr : re_match.str(2)) {
           result = result*10 + char_to_int.at(chr);  
         }
-        // overflow
-        if (result > INT32_MAX)
-          result = INT32_MAX;
+        // negative
+        if (re_match.str(1) == "-")
+          result *= -1;
 
         // underflow
         else if (result < INT32_MIN)
           result  = INT32_MIN;
 
-        // negative
-        else if (re_match.str(1) == "-")
-          result *= -1;
+        // overflow
+        else if (result > INT32_MAX)
+          result = INT32_MAX;
+
       } 
       return result;
     }
