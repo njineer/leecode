@@ -12,7 +12,6 @@ class Solution {
   public:
     int reverse(int x) {
       int rev_x = 0;
-      bool prev_msb=false, msb=false;
       bool overflow = false;
       while(x) {
         // overflow check
