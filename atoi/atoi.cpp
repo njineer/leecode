@@ -20,26 +20,23 @@ private:
   public:
     int myAtoi(string str) {
       int64_t result = 0;
+      int sign = 1;
       smatch re_match;
       auto match = regex_search(str, re_match, re_base10); 
       if (!re_match.empty()) {
+        sign = re_match.str(1) == "-" ? -1 : 1;
         for (auto& chr : re_match.str(2)) {
           result = result*10 + char_to_int.at(chr);  
+          if (sign * result > INT32_MAX) {
+            result = INT32_MAX;
+            break;
+          } else if (sign * result < INT32_MIN) {
+            result = INT32_MIN;
+            break;
+          }
         }
-        // negative
-        if (re_match.str(1) == "-")
-          result *= -1;
-
-        // underflow
-        else if (result < INT32_MIN)
-          result  = INT32_MIN;
-
-        // overflow
-        else if (result > INT32_MAX)
-          result = INT32_MAX;
-
       } 
-      return result;
+      return sign*result;
     }
 };
 
@@ -59,6 +56,7 @@ int main(int argc, char** argv) {
   Solution s;
   vector<string> tests {
     "0",
+    "1",
     "+2",
     "10",
     "-101",
@@ -69,7 +67,10 @@ int main(int argc, char** argv) {
     "3000000001",
     "              0",
     "1             ",
-    "-2147483648"
+    "-2147483648",
+    "-2147483649",
+    "9999999999999999999999999999",
+    "9223372036854775809",
   };
 
   for (auto& test : tests) {
