@@ -23,6 +23,7 @@ private:
       smatch re_match;
       auto match = regex_search(str, re_match, re_base10); 
       if (!re_match.empty()) {
+        result = re_match.str(1) == "-" ? -1 : 1;
         for (auto& chr : re_match.str(2)) {
           result = result*10 + char_to_int.at(chr);  
         }
@@ -31,7 +32,7 @@ private:
           result = INT32_MAX;
 
         // underflow
-        else if (result <= INT32_MIN)
+        else if (result < INT32_MIN)
           result  = INT32_MIN;
 
         // negative
@@ -68,6 +69,7 @@ int main(int argc, char** argv) {
     "3000000001",
     "              0",
     "1             ",
+    "-2147483648"
   };
 
   for (auto& test : tests) {
