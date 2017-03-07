@@ -1,4 +1,4 @@
-//usr/bin/env g++ --std=c++14 algorithms-6.cpp -o alg6; ./alg6; exit
+//usr/bin/env g++ --std=c++14 reverse_int.cpp -o reverse_int; ./reverse_int; exit
 
 #include <iostream>
 #include <vector>
