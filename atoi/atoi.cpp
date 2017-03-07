@@ -27,7 +27,7 @@ private:
           result = result*10 + char_to_int.at(chr);  
         }
         // negative
-        if (re_match[1].matched)
+        if (re_match.str(1) == "-")
           result *= -1;
         // overflow
         if (result > INT32_MAX)
@@ -40,9 +40,9 @@ private:
     }
 };
 
-const regex Solution::re_base10("^\\s*(-)?([0-9]+).*$");
-const regex Solution::re_base2("^\\s*(-)?([01]+).*$");
-const regex Solution::re_base16("^\\s*(-)?([0-9A-Za-z]+).*$");
+const regex Solution::re_base10("^\\s*([+-])?([0-9]+).*$");
+const regex Solution::re_base2("^\\s*([+-])?([01]+).*$");
+const regex Solution::re_base16("^\\s*([+-])?([0-9A-Za-z]+).*$");
 const map<char, int> Solution::char_to_int {
   {'0', 0},  {'1', 1},  {'2', 2},  {'3', 3},  {'4', 4},
   {'5', 5},  {'6', 6},  {'7', 7},  {'8', 8},  {'9', 9},
@@ -56,6 +56,7 @@ int main(int argc, char** argv) {
   Solution s;
   vector<string> tests {
     "0",
+    "+2",
     "10",
     "-101",
     "123321",
