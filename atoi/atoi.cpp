@@ -26,12 +26,14 @@ private:
         for (auto& chr : re_match.str(2)) {
           result = result*10 + char_to_int.at(chr);  
         }
-        // negative
-        if (re_match.str(1) == "-")
-          result *= -1;
         // overflow
         if (result > INT32_MAX)
           result = INT32_MAX;
+
+        // negative
+        if (re_match.str(1) == "-")
+          result *= -1;
+
         // underflow
         else if (result < INT32_MIN)
           result  = INT32_MIN;
