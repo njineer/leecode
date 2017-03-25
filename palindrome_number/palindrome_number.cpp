@@ -34,7 +34,7 @@ class Solution {
 
     // going for an iterator-ish approach
     //  compare digits, increment/decrement
-    // but... modulo and division don't work like I'd hoped. 
+    // but... didn't think using modulo and division for digit comparison all the way through 
     // maybe still potential here though
     bool isPalindrome(int x) {
       if (x < 0) return false;
